@@ -8,7 +8,7 @@ from ROAR.agent_module.pure_pursuit_agent \
 from ROAR_Sim.carla_client.carla_runner import CarlaRunner
 from typing import Tuple
 from prettytable import PrettyTable
-from ROAR.agent_module.michael_pid_agent import PIDAgent
+from ROAR.agent_module.cameron_regional_pid_agent import RegionalPIDAgent
 
 
 def compute_score(carla_runner: CarlaRunner) -> Tuple[float, int, int]:
@@ -76,8 +76,8 @@ def suppress_warnings():
 
 def main():
     suppress_warnings()
-    agent_class = PIDAgent
-    num_trials = 10
+    agent_class = RegionalPIDAgent
+    num_trials = 1
     total_score_array = []
     num_laps = 1
     table = PrettyTable()

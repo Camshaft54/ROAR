@@ -1,0 +1,79 @@
+{
+  "default": {
+    "speed": 100
+  },
+  "regions": [
+    {
+      "description": "First Turn",
+      "speed": 80,
+      "x_min": 1300,
+      "x_max": 1460,
+      "z_min": 4240,
+      "z_max": 4260
+    },
+    {
+      "description": "First Straightaway",
+      "speed": 200,
+      "x_min": 1460,
+      "x_max": 2538,
+      "z_min": 4070,
+      "z_max": 4260
+    },
+    {
+      "description": "Second Straightaway",
+      "speed": 200,
+      "x_min": 1320,
+      "x_max": 1360,
+      "z_min": 3740,
+      "z_max": 4220
+    },
+    {
+      "description": "Second Turn",
+      "speed": 60,
+      "x_min": 1320,
+      "x_max": 1360,
+      "z_min": 3530,
+      "z_max": 3640
+    },
+    {
+      "description": "Third Straightaway",
+      "speed": 200,
+      "x_min": 1320,
+      "x_max": 1960,
+      "z_min": 3149,
+      "z_max": 3550
+    },
+    {
+      "description": "Fourth Straightaway",
+      "speed": 200,
+      "x_min": 2100,
+      "x_max": 2300,
+      "z_min": 3420,
+      "z_max": 3600
+    },
+    {
+      "description": "Sharp Turn In Hills",
+      "speed": 50,
+      "x_min": 3600,
+      "x_max": 3750,
+      "z_min": 2450,
+      "z_max": 2650
+    },
+    {
+      "description": "Turn in Hills Where Car Gets Stuck Sometimes",
+      "speed": 50,
+      "x_min": 4420,
+      "x_max": 4560,
+      "z_min": 2760,
+      "z_max": 2900
+    },
+    {
+      "description": "Roundabout",
+      "speed": 50,
+      "x_min": 2541,
+      "x_max": 2700,
+      "z_min": 4069,
+      "z_max": 4500
+    }
+  ]
+}

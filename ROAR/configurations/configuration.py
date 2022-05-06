@@ -80,6 +80,7 @@ class Configuration(BaseModel):
             60: {1, 23, }
         }
     )
+    regions_file_path: str = Field(default="./ROAR/configurations/carla/carla_regions.json")
     depth_to_pcd_config_path: str = Field(default="./ROAR/configurations/carla/carla_depth_to_pcd_config.json")
 
     lqr_config_file_path: str = Field(default="./ROAR_Sim/configurations/lqr_config.json")

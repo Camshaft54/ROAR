@@ -30,23 +30,44 @@ class WaypointFollowingMissionPlanner(MissionPlanner):
         super(WaypointFollowingMissionPlanner, self).run_in_series()
         return self.produce_mission_plan()
 
-    def __init__(self, agent: Agent):
+    def __init__(self, agent: Agent, hardcoded_waypoint_start=-1):
         super().__init__(agent=agent)
         self.logger = logging.getLogger(__name__)
         self.file_path: Path = Path(self.agent.agent_settings.waypoint_file_path)
-        self.mission_plan = self.produce_mission_plan()
+        self.mission_plan = self.produce_mission_plan(hardcoded_waypoint_start)
         self._mission_plan_backup = self.mission_plan.copy()
         self.logger.debug("Path Following Mission Planner Initiated.")
 
-    def produce_mission_plan(self) -> deque:
+    def produce_mission_plan(self, hardcoded_waypoint_start=-1) -> deque:
         """
         Generates a list of waypoints based on the input file path
         :return a list of waypoint
         """
         raw_path: List[List[float]] = self._read_data_file()
+
+        # Find the nearest waypoint to car's start position
+        if hardcoded_waypoint_start == -1:
+            start: Location = self.agent.vehicle.transform.location
+            nearest_idx = 0
+            nearest_dist = float('inf')
+            for i, waypoint in enumerate(raw_path):
+                curr_location = Location(x=waypoint[0], y=waypoint[1], z=waypoint[2])
+                curr_dist = start.distance(curr_location)
+                if curr_dist < nearest_dist:
+                    nearest_dist = curr_dist
+                    nearest_idx = i
+            self.logger.debug(f"Nearest waypoint in file is #{nearest_idx}")
+            reordered_path = raw_path[nearest_idx:]
+            reordered_path.extend(raw_path[:nearest_idx])
+        else:
+            self.logger.debug(
+                f"Using hardcoded start waypoint instead of finding nearest waypoint (#{hardcoded_waypoint_start})")
+            reordered_path = raw_path[hardcoded_waypoint_start:]
+            reordered_path.extend(raw_path[:hardcoded_waypoint_start])
+
         length = self.agent.agent_settings.num_laps * len(raw_path)
         mission_plan = deque(maxlen=length)
-        for coord in np.tile(raw_path, (self.agent.agent_settings.num_laps, 1)):
+        for coord in np.tile(reordered_path, (self.agent.agent_settings.num_laps, 1)):
             if len(coord) == 3 or len(coord) == 6:
                 mission_plan.append(self._raw_coord_to_transform(coord))
         self.logger.debug(f"Computed Mission path of length [{len(mission_plan)}]")
