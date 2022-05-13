@@ -1,6 +1,6 @@
 {
   "default": {
-    "speed": 100
+    "speed": 75
   },
   "regions": [
     {
@@ -13,7 +13,7 @@
     },
     {
       "description": "First Straightaway",
-      "speed": 200,
+      "speed": 210,
       "x_min": 1460,
       "x_max": 2538,
       "z_min": 4070,
@@ -21,7 +21,7 @@
     },
     {
       "description": "Second Straightaway",
-      "speed": 200,
+      "speed": 210,
       "x_min": 1320,
       "x_max": 1360,
       "z_min": 3740,
@@ -29,7 +29,7 @@
     },
     {
       "description": "Second Turn",
-      "speed": 60,
+      "speed": 70,
       "x_min": 1320,
       "x_max": 1360,
       "z_min": 3530,
@@ -37,7 +37,7 @@
     },
     {
       "description": "Third Straightaway",
-      "speed": 200,
+      "speed": 210,
       "x_min": 1320,
       "x_max": 1960,
       "z_min": 3149,
@@ -45,11 +45,27 @@
     },
     {
       "description": "Fourth Straightaway",
-      "speed": 200,
+      "speed": 215,
       "x_min": 2100,
       "x_max": 2300,
       "z_min": 3420,
       "z_max": 3600
+    },
+    {
+      "description": "Fourth Turn",
+      "speed": 60,
+      "x_min": 2050,
+      "x_max": 2180,
+      "z_min": 3400,
+      "z_max": 3450
+    },
+    {
+      "description": "Fifth Straightaway (first hills section)",
+      "speed": 110,
+      "x_min": 2400,
+      "x_max": 3700,
+      "z_min": 3450,
+      "z_max": 3800
     },
     {
       "description": "Sharp Turn In Hills",
@@ -68,12 +84,44 @@
       "z_max": 2900
     },
     {
-      "description": "Roundabout",
+      "description": "Car airtime section (can cause collision > 10000)",
       "speed": 50,
-      "x_min": 2541,
-      "x_max": 2700,
-      "z_min": 4069,
-      "z_max": 4500
+      "x_min": 4850,
+      "x_max": 5050,
+      "z_min": 3900,
+      "z_max": 4040
+    },
+    {
+      "description": "Sharp turn that causes collisions",
+      "speed": 60,
+      "x_min": 3100,
+      "x_max": 3200,
+      "z_min": 2560,
+      "z_max": 2700
+    },
+    {
+      "description": "Another sharp turn that causes collisions",
+      "speed": 50,
+      "x_min": 5530,
+      "x_max": 5700,
+      "z_min": 4180,
+      "z_max": 4240
+    },
+    {
+      "description": "Straightaway before last straightaway before roundabout",
+      "speed": 215,
+      "x_min": 2950,
+      "x_max": 3100,
+      "z_min": 4830,
+      "z_max": 4900
+    },
+    {
+      "description": "Sharp turn",
+      "speed": 50,
+      "x_min": 5500,
+      "x_max": 5540,
+      "z_min": 3800,
+      "z_max": 3900
     }
   ]
 }
