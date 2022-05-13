@@ -35,15 +35,15 @@ class RegionalPIDAgent(Agent):
                  sensors_data: SensorsData) -> VehicleControl:
         super(RegionalPIDAgent, self).run_step(vehicle=vehicle,
                                                sensors_data=sensors_data)
-        curr_nearest_waypoint = f"{self.local_planner.way_points_queue[0].location.x} {self.local_planner.way_points_queue[0].location.z}"
+        # curr_nearest_waypoint = f"{self.local_planner.way_points_queue[0].location.x} {self.local_planner.way_points_queue[0].location.z}"
         for i, region in enumerate(self.regions_config["regions"]):
             if region["x_min"] <= vehicle.transform.location.x <= region["x_max"] \
                     and region["z_min"] <= vehicle.transform.location.z <= region["z_max"]:
-                print(f"In region {i} ({vehicle.transform.location.x}, {vehicle.transform.location.z}) WP: ({curr_nearest_waypoint})")
+                # print(f"In region {i} ({vehicle.transform.location.x}, {vehicle.transform.location.z}) WP: ({curr_nearest_waypoint})")
                 self.pid_controller.max_speed = region["speed"]
                 break
         else:
-            print(f"In default region ({vehicle.transform.location.x}, {vehicle.transform.location.z}) WP: ({curr_nearest_waypoint})")
+            # print(f"In default region ({vehicle.transform.location.x}, {vehicle.transform.location.z}) WP: ({curr_nearest_waypoint})")
             self.pid_controller.max_speed = self.regions_config["default"]["speed"]
 
         self.transform_history.append(self.vehicle.transform)
