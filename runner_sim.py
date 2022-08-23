@@ -9,6 +9,7 @@ from misc.utils import str2bool
 from ROAR.agent_module.pid_agent import PIDAgent
 from ROAR.agent_module.forward_only_agent import ForwardOnlyAgent
 from ROAR.agent_module.cameron_regional_pid_agent import RegionalPIDAgent
+from ROAR.agent_module.special_agents.waypoint_generating_agent import WaypointGeneratingAgent
 
 
 def main(args):
@@ -21,11 +22,9 @@ def main(args):
                                npc_agent_class=RegionalPIDAgent)
     try:
         my_vehicle = carla_runner.set_carla_world()
-        # agent = ForwardOnlyAgent(vehicle=my_vehicle,
-        #                  agent_settings=agent_config)
         agent = RegionalPIDAgent(vehicle=my_vehicle, agent_settings=agent_config)
         carla_runner.start_game_loop(agent=agent,
-                                     use_manual_control=not args.auto)
+                                     use_manual_control=False)
 
     except Exception as e:
         logging.error(f"Something bad happened during initialization: {e}")

@@ -1,7 +1,8 @@
 from ROAR.agent_module.agent import Agent
 from pathlib import Path
 from ROAR.control_module.pid_controller import PIDController
-from ROAR.planning_module.local_planner.simple_waypoint_following_local_planner import SimpleWaypointFollowingLocalPlanner
+from ROAR.planning_module.local_planner.simple_waypoint_following_local_planner import \
+    SimpleWaypointFollowingLocalPlanner
 from ROAR.planning_module.behavior_planner.behavior_planner import BehaviorPlanner
 from ROAR.planning_module.mission_planner.waypoint_following_mission_planner import WaypointFollowingMissionPlanner
 from ROAR.utilities_module.data_structures_models import SensorsData
@@ -15,8 +16,8 @@ class RegionalPIDAgent(Agent):
         super().__init__(**kwargs)
         self.logger = logging.getLogger("Regional PID Agent")
         self.route_file_path = Path(self.agent_settings.waypoint_file_path)
-        self.pid_controller = PIDController(agent=self, steering_boundary=(-1, 1), throttle_boundary=(-1, 1))
-        self.mission_planner = WaypointFollowingMissionPlanner(agent=self, hardcoded_waypoint_start=850)
+        self.pid_controller = PIDController(agent=self, steering_boundary=(-1, 1), throttle_boundary=(-0.5, 1))
+        self.mission_planner = WaypointFollowingMissionPlanner(agent=self) # hardcoded_waypoint_start=850
         # initiated right after mission plan
         self.behavior_planner = BehaviorPlanner(agent=self)
         self.local_planner = SimpleWaypointFollowingLocalPlanner(
@@ -35,15 +36,17 @@ class RegionalPIDAgent(Agent):
                  sensors_data: SensorsData) -> VehicleControl:
         super(RegionalPIDAgent, self).run_step(vehicle=vehicle,
                                                sensors_data=sensors_data)
-        # curr_nearest_waypoint = f"{self.local_planner.way_points_queue[0].location.x} {self.local_planner.way_points_queue[0].location.z}"
+
+        # Iterate through regions from file
         for i, region in enumerate(self.regions_config["regions"]):
+            # If vehicle is within x and z range, set pid controller max speed to region speed
             if region["x_min"] <= vehicle.transform.location.x <= region["x_max"] \
                     and region["z_min"] <= vehicle.transform.location.z <= region["z_max"]:
-                # print(f"In region {i} ({vehicle.transform.location.x}, {vehicle.transform.location.z}) WP: ({curr_nearest_waypoint})")
+                print(f"{region['description']} {self.vehicle.transform.location}")
                 self.pid_controller.max_speed = region["speed"]
                 break
-        else:
-            # print(f"In default region ({vehicle.transform.location.x}, {vehicle.transform.location.z}) WP: ({curr_nearest_waypoint})")
+        else:  # If vehicle is not in a region, set speed to default
+            print(f"default {self.vehicle.transform.location}")
             self.pid_controller.max_speed = self.regions_config["default"]["speed"]
 
         self.transform_history.append(self.vehicle.transform)

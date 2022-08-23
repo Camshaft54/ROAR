@@ -78,13 +78,9 @@ class LongPIDController(Controller):
             _de = 0.0
             _ie = 0.0
         pid_output = (k_p * error) + (k_d * _de) + (k_i * _ie)
-        # print(f"PID Output: {pid_output}")
-        # clipped_output = float(np.clip(pid_output, self.throttle_boundary[0],
-        #                        self.throttle_boundary[1]))
-        clipped_output = float(np.clip(np.interp(pid_output, [-35, 1], [-0.5, 1]), self.throttle_boundary[0], self.throttle_boundary[1]))
-        # self.logger.debug(f"curr_speed: {round(current_speed, 2)} | kp: {round(k_p, 2)} | kd: {k_d} | ki = {k_i} | "
-        #       f"err = {round(error, 2)} | de = {round(_de, 2)} | ie = {round(_ie, 2)}")
-              # f"self._error_buffer[-1] {self._error_buffer[-1]} | self._error_buffer[-2] = {self._error_buffer[-2]}")
+
+        clipped_output = float(np.interp(pid_output, [-35, 1], self.throttle_boundary))
+
         return clipped_output
 
 

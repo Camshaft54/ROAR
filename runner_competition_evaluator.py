@@ -80,7 +80,7 @@ def main():
     agent_class = RegionalPIDAgent
     num_trials = 1
     total_score_array = []
-    num_laps = 2
+    num_laps = 1
     table = PrettyTable()
     table.field_names = ["time_elapsed (sec)", "num_collisions", "laps completed"]
 
