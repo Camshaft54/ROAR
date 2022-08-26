@@ -42,11 +42,11 @@ class RegionalPIDAgent(Agent):
             # If vehicle is within x and z range, set pid controller max speed to region speed
             if region["x_min"] <= vehicle.transform.location.x <= region["x_max"] \
                     and region["z_min"] <= vehicle.transform.location.z <= region["z_max"]:
-                print(f"{region['description']} {self.vehicle.transform.location}")
+                # print(f"{region['description']} {self.vehicle.transform.location}")
                 self.pid_controller.max_speed = region["speed"]
                 break
         else:  # If vehicle is not in a region, set speed to default
-            print(f"default {self.vehicle.transform.location}")
+            # print(f"default {self.vehicle.transform.location}")
             self.pid_controller.max_speed = self.regions_config["default"]["speed"]
 
         self.transform_history.append(self.vehicle.transform)

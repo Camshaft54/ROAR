@@ -7,14 +7,14 @@
       "description": "First Turn",
       "speed": 80,
       "x_min": 1320,
-      "x_max": 1460,
+      "x_max": 1430,
       "z_min": 4230,
       "z_max": 4260
     },
     {
       "description": "First Straightaway",
       "speed": 210,
-      "x_min": 1450,
+      "x_min": 1430,
       "x_max": 2538,
       "z_min": 4072,
       "z_max": 4255
@@ -85,7 +85,7 @@
     },
     {
       "description": "Turn in Hills Where Car Gets Stuck Sometimes",
-      "speed": 50,
+      "speed": 40,
       "x_min": 4420,
       "x_max": 4560,
       "z_min": 2760,
